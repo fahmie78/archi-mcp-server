@@ -6,7 +6,7 @@ An Eclipse PDE plugin for [Archi](https://www.archimatetool.com/) that exposes A
 
 Archi MCP Server embeds an HTTP server inside Archi that speaks MCP. Once running, any MCP-compatible LLM client (Claude, Cline, LM Studio, etc.) can connect and interact with the currently open ArchiMate model — asking questions, searching elements, traversing relationships, composing view diagrams, and even creating or modifying model content.
 
-The server provides **70 MCP tools** across querying, searching, creating, layout, routing, assessment, batch operations, images, specializations, and more — plus **14 MCP resources** with ArchiMate reference material, workflow guides, and a viewpoint recipe library for LLMs.
+The server provides **71 MCP tools** across querying, searching, creating, layout, routing, assessment, batch operations, images, specializations, and more — plus **15 MCP resources** with ArchiMate reference material, workflow guides, and a viewpoint recipe library for LLMs.
 
 **Example conversation:**
 
@@ -208,12 +208,13 @@ untrusted input.
 
 ## Available Tools
 
-The server exposes **70 MCP tools** organised into functional categories.
+The server exposes **71 MCP tools** organised into functional categories.
 
-### Query & Model Inspection (6 tools)
+### Query & Model Inspection (7 tools)
 
 | Tool | Description |
 |---|---|
+| `get-validation-findings` | Run Archi's built-in model Validator (the "Validate Model" / Issues view checks) over the loaded model and return its findings — errors, warnings, advice — as structured knowledge with per-finding target ids for follow-up. Optional `severity` filter and `limit`; computed live at call time |
 | `get-model-info` | Model overview — name, `purpose`, custom `properties`, element/relationship/view counts by type and layer, plus specialization count. Read counterpart to `update-model` |
 | `get-element` | Retrieve element(s) by ID (single via `id` or batch via `ids` array) |
 | `get-views` | List views with optional viewpoint type or name filtering |

@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.10.0 (Unreleased)
+
+Validator findings as agent knowledge. The server can now read the output of Archi's built-in model Validator — the same checks behind **Tools → Validate Model** and the Issues view (the `com.archimatetool.hammer` bundle) — and serve it to MCP clients as structured findings, taking the surface to **71 tools** and **15 resources**.
+
+- **New tool `get-validation-findings`** — runs the Validator's eight checkers over the loaded model live at call time and returns every finding with its severity (`error` / `warning` / `advice`), the Validator's own name, description and explanation, and the target concept's `targetId` / `targetName` / `targetType` / `targetKind` so an agent can follow up with `get-element` or a mutation tool. Optional `severity` filter (single value or comma-separated) and `limit` (1–500, default 100); findings are ordered errors first, then warnings, then advice, and the per-severity counts always describe the full, unfiltered run. The user's Validator check preferences are honoured; each checker runs behind a guard so a checker unavailable in the current runtime can never fail the whole run.
+- **New reference resource `archimate://reference/validation-findings`** — severity semantics and per-finding-type remediation guidance (also readable via `get-guidance` on clients without MCP resource support).
+- Implementation notes: the frozen `ArchiModelAccessor` facade is untouched — the capability lands as a new `ValidationFindingsProvider` collaborator in the model layer, wired through `HandlerRegistrar`, with headless unit tests driving the real checkers against `IArchimateFactory`-built models.
+
 ## v1.9.0 (2026-09-07)
 
 > Everything below is stated relative to **v1.8.0**; intermediate states that existed only during the v1.9 cycle are folded into the entry describing the shipped behaviour.
